@@ -43,8 +43,7 @@ def dashboard(request: Request, db: Session = Depends(get_db)):
     # Alert stats
     critical_alerts = sum(1 for a in recent_alerts if a.severity == AlertSeverity.CRITICAL)
 
-    return templates.TemplateResponse("dashboard.html", {
-        "request": request,
+    return templates.TemplateResponse(request, "dashboard.html", {
         "vehicles": vehicles,
         "recent_alerts": recent_alerts,
         "stats": {
@@ -61,7 +60,7 @@ def dashboard(request: Request, db: Session = Depends(get_db)):
 @router.get("/map")
 def fleet_map(request: Request):
     """Live fleet map page with Leaflet.js."""
-    return templates.TemplateResponse("fleet_map.html", {"request": request})
+    return templates.TemplateResponse(request, "fleet_map.html")
 
 
 @router.get("/api/v1/dashboard/fleet-map")

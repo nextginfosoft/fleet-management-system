@@ -73,8 +73,7 @@ async def auth_middleware(request: Request, call_next):
 def _render_login(request: Request, next_url: str, error: str | None = None,
                   username: str | None = None, status_code: int = 200):
     demo = settings.auth.DEMO_MODE
-    return templates.TemplateResponse("login.html", {
-        "request": request,
+    return templates.TemplateResponse(request, "login.html", {
         "next": next_url,
         "error": error,
         "demo_mode": demo,
@@ -85,8 +84,7 @@ def _render_login(request: Request, next_url: str, error: str | None = None,
 
 @router.get("/")
 def landing(request: Request):
-    return templates.TemplateResponse("landing.html", {
-        "request": request,
+    return templates.TemplateResponse(request, "landing.html", {
         "logged_in": bool(read_session(request.cookies.get(COOKIE_NAME))),
         "demo_mode": settings.auth.DEMO_MODE,
         "demo_user": settings.auth.USERNAME,
