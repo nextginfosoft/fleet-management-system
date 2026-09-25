@@ -247,6 +247,12 @@ Key settings:
 | `GUNICORN_WORKERS` | `4` | Worker processes |
 | `DB_DB_URL` | `sqlite:///data/fleet.db` | Database URL |
 | `LOG_LEVEL` | `info` | Log verbosity |
+| `AUTH_DEMO_MODE` | `true` | Prefill the login page with the demo login. Set `false` for real use |
+| `AUTH_USERNAME` | `demo` | Login username |
+| `AUTH_PASSWORD` | `demo1234` | Login password. Change it outside a demo |
+| `AUTH_SESSION_HOURS` | `12` | How long a login lasts |
+
+The dashboard, map and API need a login. `POST /api/v1/telemetry/ingest` stays open so vehicles and the simulator can send data.
 
 ### CLI Commands
 
@@ -333,8 +339,11 @@ Real-time monitoring with configurable thresholds:
 ### Dashboard
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET    | `/` | Main dashboard page |
-| GET    | `/map` | Live fleet map (Leaflet.js) |
+| GET    | `/` | Public landing page |
+| GET/POST | `/login` | Sign in (demo login is prefilled when `AUTH_DEMO_MODE=true`) |
+| GET    | `/logout` | Sign out |
+| GET    | `/dashboard` | Main dashboard page (login required) |
+| GET    | `/map` | Live fleet map (Leaflet.js, login required) |
 | GET    | `/api/v1/dashboard/fleet-map` | Vehicle locations (JSON) |
 | GET    | `/api/v1/dashboard/fleet-map/geojson` | Vehicle locations (GeoJSON) |
 | GET    | `/api/v1/dashboard/stats` | Fleet statistics |

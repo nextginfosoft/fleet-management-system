@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in — Fleet Management System</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(ellipse at 50% 0%, #1d3350 0%, #0f1923 60%);
+            color: #e0e6ed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(160deg, #1a2332 0%, #16202d 100%);
+            border: 1px solid #243447;
+            border-radius: 16px;
+            padding: 36px 32px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        .brand {
+            display: block;
+            text-align: center;
+            text-decoration: none;
+            font-size: 22px;
+            color: #2d9cdb;
+            margin-bottom: 8px;
+        }
+
+        .brand span { color: #e0e6ed; font-weight: 300; }
+
+        h1 { font-size: 22px; text-align: center; margin-bottom: 6px; }
+
+        .sub { text-align: center; color: #8899aa; font-size: 14px; margin-bottom: 24px; }
+
+        .demo-note {
+            background: rgba(45, 156, 219, 0.12);
+            border: 1px solid rgba(45, 156, 219, 0.35);
+            color: #9fd3f2;
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .error {
+            background: rgba(231, 76, 60, 0.12);
+            border: 1px solid rgba(231, 76, 60, 0.4);
+            color: #f1948a;
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        label { display: block; font-size: 13px; color: #8899aa; margin-bottom: 6px; }
+
+        input {
+            width: 100%;
+            min-height: 46px;
+            background: #0f1923;
+            border: 1px solid #2c3e52;
+            border-radius: 10px;
+            color: #e0e6ed;
+            font-size: 15px;
+            padding: 0 14px;
+            margin-bottom: 16px;
+        }
+
+        input:focus { outline: none; border-color: #2d9cdb; box-shadow: 0 0 0 3px rgba(45, 156, 219, 0.2); }
+
+        button {
+            width: 100%;
+            min-height: 48px;
+            background: #2d9cdb;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        button:hover { background: #2589c0; }
+
+        .back { display: block; text-align: center; margin-top: 18px; font-size: 13px; color: #8899aa; text-decoration: none; }
+        .back:hover { color: #2d9cdb; }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <a class="brand" href="/">🚗 Fleet<span>Manager</span></a>
+        <h1>Sign in</h1>
+        <p class="sub">Access the fleet dashboard and live map.</p>
+
+        {% if demo_mode %}
+        <div class="demo-note">
+            This is a demo. The demo login is filled in for you, so just press the button.
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error" role="alert">{{ error }}</div>
+        {% endif %}
+
+        <form method="post" action="/login">
+            <input type="hidden" name="next" value="{{ next }}">
+
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" autocomplete="username"
+                   value="{{ prefill_user }}" required>
+
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password"
+                   value="{{ prefill_pass }}" required>
+
+            <button type="submit">{% if demo_mode %}Enter demo dashboard{% else %}Sign in{% endif %}</button>
+        </form>
+
+        <a class="back" href="/">Back to home</a>
+    </main>
+</body>
+</html>

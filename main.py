@@ -30,6 +30,7 @@ from api.vehicles import router as vehicles_router
 from api.telemetry import router as telemetry_router
 from api.alerts import router as alerts_router
 from api.dashboard import router as dashboard_router
+from api.auth import router as auth_router, auth_middleware
 
 # Configure logging
 logging.basicConfig(
@@ -46,6 +47,9 @@ async def lifespan(app: FastAPI):
     logger.info("=" * 60)
     logger.info("  Fleet Management System — Starting Up")
     logger.info("=" * 60)
+
+    if settings.api.SECRET_KEY.startswith("change-this"):
+        logger.warning("API_SECRET_KEY is the built-in default. Set your own before deploying.")
 
     # Initialize database
     init_db()
@@ -94,7 +98,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Login guard: everything except the public paths needs a session cookie
+app.middleware("http")(auth_middleware)
+
 # Register API routers
+app.include_router(auth_router)
 app.include_router(dashboard_router)
 app.include_router(vehicles_router, prefix=settings.api.API_PREFIX)
 app.include_router(telemetry_router, prefix=settings.api.API_PREFIX)

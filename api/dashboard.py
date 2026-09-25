@@ -22,7 +22,7 @@ _base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 templates = Jinja2Templates(directory=os.path.join(_base_dir, "templates"))
 
 
-@router.get("/")
+@router.get("/dashboard")
 def dashboard(request: Request, db: Session = Depends(get_db)):
     """Main dashboard page."""
     vehicles = db.query(Vehicle).filter(Vehicle.is_active == True).all()

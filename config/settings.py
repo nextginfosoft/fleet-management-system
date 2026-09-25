@@ -101,6 +101,17 @@ class APISettings(BaseSettings):
         env_prefix = "API_"
 
 
+class AuthSettings(BaseSettings):
+    """Session login settings. With DEMO_MODE on, the login page is prefilled."""
+    DEMO_MODE: bool = True
+    USERNAME: str = "demo"
+    PASSWORD: str = "demo1234"
+    SESSION_HOURS: int = 12
+
+    class Config:
+        env_prefix = "AUTH_"
+
+
 class AppSettings:
     """Main application settings aggregator."""
 
@@ -109,6 +120,7 @@ class AppSettings:
         self.telematics = TelematicsSettings()
         self.alerts = AlertSettings()
         self.api = APISettings()
+        self.auth = AuthSettings()
         self.base_dir = BASE_DIR
 
         # Ensure data directory exists
