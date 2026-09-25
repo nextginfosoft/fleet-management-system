@@ -51,7 +51,7 @@ COPY --chown=fleetmgr:fleetmgr api/ api/
 COPY --chown=fleetmgr:fleetmgr telematics/ telematics/
 COPY --chown=fleetmgr:fleetmgr services/ services/
 COPY --chown=fleetmgr:fleetmgr templates/ templates/
-COPY --chown=fleetmgr:fleetmgr main.py cli.py __init__.py ./
+COPY --chown=fleetmgr:fleetmgr main.py cli.py simulator.py __init__.py ./
 COPY --chown=fleetmgr:fleetmgr gunicorn_config.py ./
 
 # Create data directory for SQLite
