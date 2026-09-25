@@ -207,6 +207,7 @@ def run_simulator(
 
 
 if __name__ == "__main__":
+    import os
     import sys
 
     logging.basicConfig(level=logging.INFO)
@@ -216,4 +217,9 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         vehicle_ids = [int(x) for x in sys.argv[1].split(",")]
 
-    run_simulator(vehicle_ids=vehicle_ids)
+    base_url = os.environ.get("FLEET_API_URL", "http://localhost:8000").rstrip("/")
+    run_simulator(
+        api_url=f"{base_url}/api/v1/telemetry/ingest",
+        vehicle_ids=vehicle_ids,
+        interval=float(os.environ.get("FLEET_SIM_INTERVAL", "2.0")),
+    )
