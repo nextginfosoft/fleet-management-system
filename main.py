@@ -1,5 +1,5 @@
 """
-Fleet Management System — Main Application Entry Point
+Pulse Connect — Main Application Entry Point
 
 Starts the FastAPI server with all routes, initializes the database,
 and optionally starts vehicle tracking services.
@@ -45,7 +45,7 @@ logger = logging.getLogger("fleet_manager")
 async def lifespan(app: FastAPI):
     """Application startup/shutdown lifecycle."""
     logger.info("=" * 60)
-    logger.info("  Fleet Management System — Starting Up")
+    logger.info("  Pulse Connect — Starting Up")
     logger.info("=" * 60)
 
     if settings.api.SECRET_KEY.startswith("change-this"):
@@ -66,13 +66,13 @@ async def lifespan(app: FastAPI):
 
     yield  # Application is running
 
-    logger.info("Fleet Management System — Shutting Down")
+    logger.info("Pulse Connect — Shutting Down")
 
 
 # ── Create FastAPI App ─────────────────────────────────────────
 
 app = FastAPI(
-    title="Fleet Management System",
+    title="Pulse Connect",
     description="""
     🚗 Automotive Fleet Management with Telematics
 
@@ -114,7 +114,7 @@ app.include_router(alerts_router, prefix=settings.api.API_PREFIX)
 @app.get("/health", tags=["System"])
 def health_check():
     """API health check endpoint."""
-    return {"status": "healthy", "service": "Fleet Management System", "version": "1.0.0"}
+    return {"status": "healthy", "service": "Pulse Connect", "version": "1.0.0"}
 
 
 # ── Sample Data Seeder ─────────────────────────────────────────

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fleet Map — Live Vehicle Tracking</title>
+    <title>Pulse Connect — Live Vehicle Tracking</title>
+    {% include "_fonts.html" %}
 
     <!-- Leaflet.js CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -18,9 +19,9 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0f1923;
-            color: #e0e6ed;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: #0D0B1A;
+            color: #F3F2FB;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -28,25 +29,25 @@
 
         /* ── Top Bar ─────────────────────────────────── */
         .topbar {
-            background: linear-gradient(135deg, #1a2332 0%, #243447 100%);
+            background: linear-gradient(135deg, #15122B 0%, #1E1A3D 100%);
             padding: 12px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #2d9cdb;
+            border-bottom: 2px solid #6C4CFF;
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
             z-index: 1000;
         }
 
         .topbar h1 {
             font-size: 18px;
-            color: #2d9cdb;
+            color: #F3F2FB;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .topbar h1 span { color: #e0e6ed; font-weight: 300; }
+        .topbar h1 span { color: #F3F2FB; font-weight: 300; }
 
         .topbar-right {
             display: flex;
@@ -56,9 +57,9 @@
         }
 
         .back-btn {
-            background: rgba(45,156,219,0.15);
-            color: #2d9cdb;
-            border: 1px solid rgba(45,156,219,0.3);
+            background: rgba(108, 76, 255,0.15);
+            color: #A996FF;
+            border: 1px solid rgba(108, 76, 255,0.3);
             padding: 6px 14px;
             border-radius: 6px;
             cursor: pointer;
@@ -68,8 +69,8 @@
         }
 
         .back-btn:hover {
-            background: rgba(45,156,219,0.25);
-            border-color: #2d9cdb;
+            background: rgba(108, 76, 255,0.25);
+            border-color: #6C4CFF;
         }
 
         .live-indicator {
@@ -93,7 +94,7 @@
         }
 
         .status-text {
-            color: #6b8299;
+            color: #8582AD;
         }
 
         /* ── Main Layout ─────────────────────────────── */
@@ -106,8 +107,8 @@
         /* ── Sidebar / Vehicle List ──────────────────── */
         .sidebar {
             width: 320px;
-            background: #1a2836;
-            border-right: 1px solid #2a3a4a;
+            background: #16132B;
+            border-right: 1px solid #2A2550;
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -115,7 +116,7 @@
 
         .sidebar-header {
             padding: 14px 16px;
-            border-bottom: 1px solid #2a3a4a;
+            border-bottom: 1px solid #2A2550;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -129,7 +130,7 @@
         }
 
         .vehicle-count {
-            background: #2d9cdb;
+            background: #6C4CFF;
             color: white;
             padding: 2px 8px;
             border-radius: 10px;
@@ -139,14 +140,14 @@
 
         .search-box {
             padding: 10px 16px;
-            border-bottom: 1px solid #2a3a4a;
+            border-bottom: 1px solid #2A2550;
         }
 
         .search-box input {
             width: 100%;
-            background: #0f1923;
-            border: 1px solid #2a3a4a;
-            color: #e0e6ed;
+            background: #0D0B1A;
+            border: 1px solid #2A2550;
+            color: #F3F2FB;
             padding: 8px 12px;
             border-radius: 6px;
             font-size: 13px;
@@ -154,14 +155,14 @@
         }
 
         .search-box input:focus {
-            border-color: #2d9cdb;
+            border-color: #6C4CFF;
         }
 
-        .search-box input::placeholder { color: #4a6177; }
+        .search-box input::placeholder { color: #6B6795; }
 
         .filter-bar {
             padding: 8px 16px;
-            border-bottom: 1px solid #2a3a4a;
+            border-bottom: 1px solid #2A2550;
             display: flex;
             gap: 6px;
             flex-wrap: wrap;
@@ -169,8 +170,8 @@
 
         .filter-btn {
             background: rgba(255,255,255,0.05);
-            border: 1px solid #2a3a4a;
-            color: #8899aa;
+            border: 1px solid #2A2550;
+            color: #A7A5C6;
             padding: 4px 10px;
             border-radius: 14px;
             font-size: 11px;
@@ -179,9 +180,9 @@
         }
 
         .filter-btn:hover, .filter-btn.active {
-            background: rgba(45,156,219,0.15);
-            border-color: #2d9cdb;
-            color: #2d9cdb;
+            background: rgba(108, 76, 255,0.15);
+            border-color: #6C4CFF;
+            color: #A996FF;
         }
 
         .filter-btn.active-green.active { background: rgba(39,174,96,0.15); border-color: #27ae60; color: #27ae60; }
@@ -195,17 +196,17 @@
 
         .vehicle-card {
             padding: 12px 16px;
-            border-bottom: 1px solid #1e2d3d;
+            border-bottom: 1px solid #1B1737;
             cursor: pointer;
             transition: background 0.15s;
         }
 
         .vehicle-card:hover, .vehicle-card.selected {
-            background: rgba(45,156,219,0.08);
+            background: rgba(108, 76, 255,0.08);
         }
 
         .vehicle-card.selected {
-            border-left: 3px solid #2d9cdb;
+            border-left: 3px solid #6C4CFF;
         }
 
         .vc-top {
@@ -230,7 +231,7 @@
         }
 
         .vc-status.in_transit { background: rgba(39,174,96,0.2); color: #27ae60; }
-        .vc-status.idle { background: rgba(108,117,125,0.2); color: #8899aa; }
+        .vc-status.idle { background: rgba(108,117,125,0.2); color: #A7A5C6; }
         .vc-status.active { background: rgba(39,174,96,0.2); color: #27ae60; }
         .vc-status.maintenance { background: rgba(243,156,18,0.2); color: #f39c12; }
         .vc-status.out_of_service { background: rgba(231,76,60,0.2); color: #e74c3c; }
@@ -240,7 +241,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 4px;
             font-size: 11px;
-            color: #6b8299;
+            color: #8582AD;
         }
 
         .vc-details span { display: flex; align-items: center; gap: 4px; }
@@ -248,32 +249,32 @@
         /* ── Map ─────────────────────────────────────── */
         #map {
             flex: 1;
-            background: #0f1923;
+            background: #0D0B1A;
         }
 
         /* Leaflet popup dark theme */
         .leaflet-popup-content-wrapper {
-            background: #1a2836 !important;
-            color: #e0e6ed !important;
+            background: #16132B !important;
+            color: #F3F2FB !important;
             border-radius: 10px !important;
-            border: 1px solid #2a3a4a !important;
+            border: 1px solid #2A2550 !important;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
         }
 
         .leaflet-popup-tip {
-            background: #1a2836 !important;
-            border: 1px solid #2a3a4a !important;
+            background: #16132B !important;
+            border: 1px solid #2A2550 !important;
         }
 
         .leaflet-popup-close-button {
-            color: #6b8299 !important;
+            color: #8582AD !important;
         }
 
         .popup-content h3 {
-            color: #2d9cdb;
+            color: #A996FF;
             font-size: 14px;
             margin-bottom: 8px;
-            border-bottom: 1px solid #2a3a4a;
+            border-bottom: 1px solid #2A2550;
             padding-bottom: 6px;
         }
 
@@ -284,8 +285,8 @@
             font-size: 12px;
         }
 
-        .popup-content .popup-row .label { color: #6b8299; }
-        .popup-content .popup-row .val { color: #e0e6ed; font-weight: 500; }
+        .popup-content .popup-row .label { color: #8582AD; }
+        .popup-content .popup-row .val { color: #F3F2FB; font-weight: 500; }
 
         .popup-content .popup-status {
             display: inline-block;
@@ -307,9 +308,9 @@
         }
 
         .map-stat {
-            background: rgba(26,40,54,0.92);
+            background: rgba(22, 19, 43,0.92);
             backdrop-filter: blur(10px);
-            border: 1px solid #2a3a4a;
+            border: 1px solid #2A2550;
             padding: 8px 14px;
             border-radius: 8px;
             font-size: 12px;
@@ -324,7 +325,7 @@
         }
 
         .dot-transit { background: #27ae60; }
-        .dot-idle { background: #8899aa; }
+        .dot-idle { background: #A7A5C6; }
         .dot-maintenance { background: #f39c12; }
         .dot-alert { background: #e74c3c; }
 
@@ -334,9 +335,9 @@
             top: 80px;
             right: 16px;
             z-index: 800;
-            background: rgba(26,40,54,0.92);
+            background: rgba(22, 19, 43,0.92);
             backdrop-filter: blur(10px);
-            border: 1px solid #2a3a4a;
+            border: 1px solid #2A2550;
             border-radius: 10px;
             padding: 12px 16px;
             font-size: 12px;
@@ -346,7 +347,7 @@
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            color: #6b8299;
+            color: #8582AD;
             margin-bottom: 8px;
         }
 
@@ -390,25 +391,25 @@
         .marker-out_of_service { background: #e74c3c; }
 
         /* ── Dark map tiles override ─────────────────── */
-        .leaflet-tile-pane { filter: brightness(0.85); }
+        .leaflet-tile-pane { filter: invert(1) hue-rotate(180deg) brightness(0.8) contrast(0.95) saturate(0.55); }
 
         .leaflet-control-zoom a {
-            background: #1a2836 !important;
-            color: #e0e6ed !important;
-            border-color: #2a3a4a !important;
+            background: #16132B !important;
+            color: #F3F2FB !important;
+            border-color: #2A2550 !important;
         }
 
         .leaflet-control-zoom a:hover {
-            background: #243447 !important;
+            background: #1E1A3D !important;
         }
 
         .leaflet-control-attribution {
-            background: rgba(26,40,54,0.8) !important;
-            color: #4a6177 !important;
+            background: rgba(22, 19, 43,0.8) !important;
+            color: #6B6795 !important;
             font-size: 10px !important;
         }
 
-        .leaflet-control-attribution a { color: #2d9cdb !important; }
+        .leaflet-control-attribution a { color: #A996FF !important; }
 
         /* ── Responsive ──────────────────────────────── */
         @media (max-width: 768px) {
@@ -419,15 +420,15 @@
 
         /* ── Scrollbar ───────────────────────────────── */
         ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #1a2836; }
-        ::-webkit-scrollbar-thumb { background: #2a3a4a; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3a4a5a; }
+        ::-webkit-scrollbar-track { background: #16132B; }
+        ::-webkit-scrollbar-thumb { background: #2A2550; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3E3870; }
     </style>
 </head>
 <body>
     <!-- Top Bar -->
     <div class="topbar">
-        <h1>🗺️ Fleet<span>Map</span> — Live Vehicle Tracking</h1>
+        <h1>{% include "_logo.html" %}<strong class="wm">Pulse <i>Connect</i></strong><span>— Live Vehicle Tracking</span></h1>
         <div class="topbar-right">
             <a href="/dashboard" class="back-btn">← Dashboard</a>
             <div class="live-indicator">
@@ -514,9 +515,8 @@
         });
 
         // Dark-themed tile layer (CartoDB Dark Matter)
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>',
-            subdomains: 'abcd',
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             maxZoom: 19
         }).addTo(map);
 
@@ -532,7 +532,7 @@
                 if (count > 25) size = 'large';
                 return L.divIcon({
                     html: `<div style="
-                        background: rgba(45,156,219,0.85);
+                        background: rgba(108, 76, 255,0.85);
                         color: white;
                         border-radius: 50%;
                         width: ${size === 'large' ? 48 : size === 'medium' ? 40 : 32}px;
@@ -603,7 +603,7 @@
             };
             const statusTextColors = {
                 'in_transit': '#27ae60', 'active': '#27ae60',
-                'idle': '#8899aa', 'maintenance': '#f39c12',
+                'idle': '#A7A5C6', 'maintenance': '#f39c12',
                 'out_of_service': '#e74c3c'
             };
 
@@ -750,7 +750,7 @@
 
             if (filtered.length === 0) {
                 list.innerHTML = `
-                    <div style="text-align:center; color:#4a6177; padding:40px;">
+                    <div style="text-align:center; color:#6B6795; padding:40px;">
                         No vehicles found
                     </div>`;
             }

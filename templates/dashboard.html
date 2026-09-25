@@ -3,44 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fleet Management System — Telematics Dashboard</title>
+    <title>Pulse Connect — Telematics Dashboard</title>
+    {% include "_fonts.html" %}
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0f1923;
-            color: #e0e6ed;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: #0D0B1A;
+            color: #F3F2FB;
             min-height: 100vh;
         }
 
         /* ── Header ────────────────────────────────────── */
         .header {
-            background: linear-gradient(135deg, #1a2332 0%, #243447 100%);
+            background: linear-gradient(135deg, #15122B 0%, #1E1A3D 100%);
             padding: 16px 32px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #2d9cdb;
+            border-bottom: 2px solid #6C4CFF;
             box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .header h1 {
             font-size: 22px;
-            color: #2d9cdb;
+            color: #F3F2FB;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .header h1 span { color: #e0e6ed; font-weight: 300; }
+        .header h1 span { color: #F3F2FB; font-weight: 300; }
 
         .header-right {
             display: flex;
             align-items: center;
             gap: 20px;
             font-size: 14px;
-            color: #8899aa;
+            color: #A7A5C6;
         }
 
         .live-indicator {
@@ -70,21 +71,21 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #1e2d3d 0%, #253545 100%);
+            background: linear-gradient(135deg, #1B1737 0%, #211D45 100%);
             border-radius: 12px;
             padding: 20px;
-            border: 1px solid #2a3a4a;
+            border: 1px solid #2A2550;
             transition: transform 0.2s, border-color 0.2s;
         }
 
         .stat-card:hover {
             transform: translateY(-2px);
-            border-color: #2d9cdb;
+            border-color: #6C4CFF;
         }
 
         .stat-card .label {
             font-size: 12px;
-            color: #6b8299;
+            color: #8582AD;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 8px;
@@ -97,7 +98,7 @@
         }
 
         .stat-card.active .value { color: #27ae60; }
-        .stat-card.transit .value { color: #2d9cdb; }
+        .stat-card.transit .value { color: #6C4CFF; }
         .stat-card.maintenance .value { color: #f39c12; }
         .stat-card.alerts .value { color: #e74c3c; }
 
@@ -111,15 +112,15 @@
 
         /* ── Vehicle Table ─────────────────────────────── */
         .panel {
-            background: #1a2836;
+            background: #16132B;
             border-radius: 12px;
-            border: 1px solid #2a3a4a;
+            border: 1px solid #2A2550;
             overflow: hidden;
         }
 
         .panel-header {
             padding: 16px 20px;
-            border-bottom: 1px solid #2a3a4a;
+            border-bottom: 1px solid #2A2550;
             font-size: 16px;
             font-weight: 600;
             display: flex;
@@ -128,7 +129,7 @@
         }
 
         .panel-header .badge {
-            background: #2d9cdb;
+            background: #6C4CFF;
             color: white;
             padding: 2px 10px;
             border-radius: 12px;
@@ -141,23 +142,23 @@
         }
 
         th {
-            background: #1e2d3d;
+            background: #1B1737;
             padding: 12px 16px;
             text-align: left;
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #6b8299;
+            color: #8582AD;
         }
 
         td {
             padding: 12px 16px;
-            border-bottom: 1px solid #1e2d3d;
+            border-bottom: 1px solid #1B1737;
             font-size: 14px;
         }
 
         tr:hover td {
-            background: rgba(45, 156, 219, 0.05);
+            background: rgba(108, 76, 255, 0.05);
         }
 
         .status-badge {
@@ -170,14 +171,14 @@
         }
 
         .status-active, .status-in_transit { background: rgba(39,174,96,0.2); color: #27ae60; }
-        .status-idle { background: rgba(108,117,125,0.2); color: #8899aa; }
+        .status-idle { background: rgba(108,117,125,0.2); color: #A7A5C6; }
         .status-maintenance { background: rgba(243,156,18,0.2); color: #f39c12; }
         .status-out_of_service { background: rgba(231,76,60,0.2); color: #e74c3c; }
 
         .fuel-bar {
             width: 60px;
             height: 8px;
-            background: #2a3a4a;
+            background: #2A2550;
             border-radius: 4px;
             overflow: hidden;
             display: inline-block;
@@ -203,7 +204,7 @@
 
         .alert-item {
             padding: 12px 16px;
-            border-bottom: 1px solid #1e2d3d;
+            border-bottom: 1px solid #1B1737;
             display: flex;
             align-items: flex-start;
             gap: 12px;
@@ -224,17 +225,17 @@
 
         .alert-critical .alert-icon { background: rgba(231,76,60,0.2); }
         .alert-warning .alert-icon { background: rgba(243,156,18,0.2); }
-        .alert-info .alert-icon { background: rgba(45,156,219,0.2); }
+        .alert-info .alert-icon { background: rgba(108, 76, 255,0.2); }
 
         .alert-content { flex: 1; }
         .alert-content .message { font-size: 13px; margin-bottom: 4px; }
-        .alert-content .meta { font-size: 11px; color: #6b8299; }
+        .alert-content .meta { font-size: 11px; color: #8582AD; }
 
         /* ── Map Placeholder ───────────────────────────── */
         .map-container {
-            background: #1a2836;
+            background: #16132B;
             border-radius: 12px;
-            border: 1px solid #2a3a4a;
+            border: 1px solid #2A2550;
             height: 400px;
             display: flex;
             align-items: center;
@@ -246,7 +247,7 @@
 
         .map-placeholder {
             text-align: center;
-            color: #4a6177;
+            color: #6B6795;
         }
 
         .map-placeholder .icon { font-size: 48px; margin-bottom: 12px; }
@@ -254,9 +255,9 @@
 
         /* ── Scrollbar ─────────────────────────────────── */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #1a2836; }
-        ::-webkit-scrollbar-thumb { background: #2a3a4a; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #3a4a5a; }
+        ::-webkit-scrollbar-track { background: #16132B; }
+        ::-webkit-scrollbar-thumb { background: #2A2550; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #3E3870; }
 
         /* ── Responsive ────────────────────────────────── */
         @media (max-width: 900px) {
@@ -268,15 +269,15 @@
 <body>
     <!-- Header -->
     <div class="header">
-        <h1>🚗 Fleet<span>Manager</span> — Telematics Dashboard</h1>
+        <h1>{% include "_logo.html" %}<strong class="wm">Pulse <i>Connect</i></strong><span>— Telematics Dashboard</span></h1>
         <div class="header-right">
-            <a href="/map" style="background:rgba(45,156,219,0.15);color:#2d9cdb;border:1px solid rgba(45,156,219,0.3);padding:6px 14px;border-radius:6px;text-decoration:none;font-size:13px;transition:all 0.2s;">🗺️ Live Map</a>
+            <a href="/map" style="background:rgba(108, 76, 255,0.15);color:#A996FF;border:1px solid rgba(108, 76, 255,0.3);padding:6px 14px;border-radius:6px;text-decoration:none;font-size:13px;transition:all 0.2s;">🗺️ Live Map</a>
             <div class="live-indicator">
                 <div class="live-dot"></div>
                 LIVE
             </div>
             <span id="clock"></span>
-            <a href="/logout" style="color:#8899aa;text-decoration:none;font-size:13px;">Log out</a>
+            <a href="/logout" style="color:#A7A5C6;text-decoration:none;font-size:13px;">Log out</a>
         </div>
     </div>
 
@@ -313,8 +314,8 @@
         <div class="map-container" id="fleet-map" style="cursor:pointer;transition:border-color 0.2s;">
             <div class="map-placeholder">
                 <div class="icon">🗺️</div>
-                <p style="color:#2d9cdb;font-weight:600;">Click to Open Live Fleet Map</p>
-                <p style="margin-top:8px; font-size:12px; color:#3a5068;">
+                <p style="color:#A996FF;font-weight:600;">Click to Open Live Fleet Map</p>
+                <p style="margin-top:8px; font-size:12px; color:#4A4380;">
                     Real-time vehicle tracking with Leaflet.js — search, filter, and monitor
                 </p>
             </div>
@@ -371,7 +372,7 @@
 
                         {% if not vehicles %}
                         <tr>
-                            <td colspan="6" style="text-align:center; color:#4a6177; padding:40px;">
+                            <td colspan="6" style="text-align:center; color:#6B6795; padding:40px;">
                                 No vehicles registered. Use the API to add vehicles.
                             </td>
                         </tr>
@@ -406,7 +407,7 @@
                 {% endfor %}
 
                 {% if not recent_alerts %}
-                <div style="text-align:center; color:#4a6177; padding:40px;">
+                <div style="text-align:center; color:#6B6795; padding:40px;">
                     ✅ No active alerts
                 </div>
                 {% endif %}

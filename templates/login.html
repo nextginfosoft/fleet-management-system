@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign in — Fleet Management System</title>
+    <title>Sign in — Pulse Connect</title>
+    {% include "_fonts.html" %}
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(ellipse at 50% 0%, #1d3350 0%, #0f1923 60%);
-            color: #e0e6ed;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            background: radial-gradient(ellipse at 50% 0%, #1B1740 0%, #0D0B1A 60%);
+            color: #F3F2FB;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -21,8 +22,8 @@
         .card {
             width: 100%;
             max-width: 420px;
-            background: linear-gradient(160deg, #1a2332 0%, #16202d 100%);
-            border: 1px solid #243447;
+            background: linear-gradient(160deg, #15122B 0%, #131026 100%);
+            border: 1px solid #1E1A3D;
             border-radius: 16px;
             padding: 36px 32px;
             box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
@@ -33,20 +34,22 @@
             text-align: center;
             text-decoration: none;
             font-size: 22px;
-            color: #2d9cdb;
+            color: #F3F2FB;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             margin-bottom: 8px;
         }
 
-        .brand span { color: #e0e6ed; font-weight: 300; }
-
         h1 { font-size: 22px; text-align: center; margin-bottom: 6px; }
 
-        .sub { text-align: center; color: #8899aa; font-size: 14px; margin-bottom: 24px; }
+        .sub { text-align: center; color: #A7A5C6; font-size: 14px; margin-bottom: 24px; }
 
         .demo-note {
-            background: rgba(45, 156, 219, 0.12);
-            border: 1px solid rgba(45, 156, 219, 0.35);
-            color: #9fd3f2;
+            background: rgba(108, 76, 255, 0.12);
+            border: 1px solid rgba(108, 76, 255, 0.35);
+            color: #C9BEFF;
             border-radius: 10px;
             padding: 12px 14px;
             font-size: 13px;
@@ -64,26 +67,26 @@
             margin-bottom: 16px;
         }
 
-        label { display: block; font-size: 13px; color: #8899aa; margin-bottom: 6px; }
+        label { display: block; font-size: 13px; color: #A7A5C6; margin-bottom: 6px; }
 
         input {
             width: 100%;
             min-height: 46px;
-            background: #0f1923;
-            border: 1px solid #2c3e52;
+            background: #0D0B1A;
+            border: 1px solid #322C5E;
             border-radius: 10px;
-            color: #e0e6ed;
+            color: #F3F2FB;
             font-size: 15px;
             padding: 0 14px;
             margin-bottom: 16px;
         }
 
-        input:focus { outline: none; border-color: #2d9cdb; box-shadow: 0 0 0 3px rgba(45, 156, 219, 0.2); }
+        input:focus { outline: none; border-color: #6C4CFF; box-shadow: 0 0 0 3px rgba(108, 76, 255, 0.2); }
 
         button {
             width: 100%;
             min-height: 48px;
-            background: #2d9cdb;
+            background: #6C4CFF;
             color: #fff;
             border: none;
             border-radius: 10px;
@@ -93,15 +96,15 @@
             transition: background 0.15s ease;
         }
 
-        button:hover { background: #2589c0; }
+        button:hover { background: #5A3CE6; }
 
-        .back { display: block; text-align: center; margin-top: 18px; font-size: 13px; color: #8899aa; text-decoration: none; }
-        .back:hover { color: #2d9cdb; }
+        .back { display: block; text-align: center; margin-top: 18px; font-size: 13px; color: #A7A5C6; text-decoration: none; }
+        .back:hover { color: #6C4CFF; }
     </style>
 </head>
 <body>
     <main class="card">
-        <a class="brand" href="/">🚗 Fleet<span>Manager</span></a>
+        <a class="brand" href="/">{% include "_logo.html" %}<strong class="wm">Pulse <i>Connect</i></strong></a>
         <h1>Sign in</h1>
         <p class="sub">Access the fleet dashboard and live map.</p>
 
