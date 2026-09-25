@@ -69,6 +69,8 @@ services:
       fleet-api:
         condition: service_healthy
     command: ["python", "simulator.py"]
+    healthcheck:
+      disable: true               # the image check probes a web server the simulator does not run
     environment:
       - FLEET_API_URL=http://fleet-api:8000
     restart: "no"
