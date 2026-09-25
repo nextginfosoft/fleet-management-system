@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pulse Connect — Real-time fleet telematics</title>
     {% include "_fonts.html" %}
-    <meta name="description" content="Track vehicles in real time, read engine diagnostics and catch unsafe driving, all from one dashboard.">
+    <meta name="description" content="A live fleet monitoring demo: vehicles on a map, engine diagnostics and alerts in one dashboard.">
+    <meta name="robots" content="noindex, nofollow">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -100,6 +101,7 @@
         <div class="wrap">
             <a class="logo" href="/">{% include "_logo.html" %}<strong class="wm">Pulse <i>Connect</i></strong></a>
             <nav class="nav-links">
+                <a class="hide-sm" href="https://nextginfosoft.com" rel="noopener">NextG InfoSoft</a>
                 <a class="hide-sm" href="#features">Features</a>
                 <a class="hide-sm" href="#how">How it works</a>
                 {% if logged_in %}
@@ -116,7 +118,7 @@
             <div class="wrap">
                 <p class="eyebrow">Fleet telematics</p>
                 <h1>Know where <span class="grad">every vehicle</span> is and how it is doing.</h1>
-                <p class="lead">Live locations, engine diagnostics, driver behaviour and alerts, together in one dashboard.</p>
+                <p class="lead">Live locations, engine diagnostics and alerts, together in one dashboard.</p>
                 <div class="hero-actions">
                     {% if logged_in %}
                     <a class="btn btn-primary" href="/dashboard">Open dashboard</a>
@@ -136,9 +138,9 @@
                     <div class="card"><div class="icon">🗺️</div><h3>Live fleet map</h3><p>See every vehicle on a map with status colours, search and filters.</p></div>
                     <div class="card"><div class="icon">🔧</div><h3>Engine diagnostics</h3><p>Read fault codes from the vehicle and see how serious each one is.</p></div>
                     <div class="card"><div class="icon">🚨</div><h3>Instant alerts</h3><p>Get flagged for speeding, overheating, low fuel, low battery and harsh driving.</p></div>
-                    <div class="card"><div class="icon">⛽</div><h3>Fuel analytics</h3><p>Follow fuel levels and consumption across vehicles and trips.</p></div>
-                    <div class="card"><div class="icon">📍</div><h3>Geofences</h3><p>Draw virtual boundaries and know when a vehicle enters or leaves.</p></div>
-                    <div class="card"><div class="icon">🧑‍✈️</div><h3>Driver safety</h3><p>Track driver behaviour and safety scores to spot risky habits early.</p></div>
+                    <div class="card"><div class="icon">⛽</div><h3>Fuel levels</h3><p>See the fuel level of every vehicle at a glance.</p></div>
+                    <div class="card"><div class="icon">🔌</div><h3>Telemetry API</h3><p>Send readings from OBD-II, CAN bus or GPS sources to one endpoint.</p></div>
+                    <div class="card"><div class="icon">🧪</div><h3>Sample fleet</h3><p>Explore five demo vehicles that move in real time on simulated data.</p></div>
                 </div>
             </div>
         </section>
@@ -148,7 +150,7 @@
                 <h2>How it works</h2>
                 <p class="section-sub">Three steps from vehicle to dashboard.</p>
                 <div class="steps">
-                    <div class="step"><div class="num">01</div><h3>Connect the vehicle</h3><p>Data comes in over OBD-II, CAN bus and GPS.</p></div>
+                    <div class="step"><div class="num">01</div><h3>Connect the vehicle</h3><p>Readings arrive over an API from OBD-II, CAN bus or GPS sources.</p></div>
                     <div class="step"><div class="num">02</div><h3>Telemetry streams in</h3><p>Speed, location, fuel and engine readings are stored as they arrive.</p></div>
                     <div class="step"><div class="num">03</div><h3>Watch and act</h3><p>The dashboard, map and alerts show what needs attention now.</p></div>
                 </div>
@@ -178,7 +180,8 @@
 
     <footer>
         <div class="wrap">
-            Pulse Connect by NextG InfoSoft. Demo environment.
+            Pulse Connect by <a href="https://nextginfosoft.com" rel="noopener">NextG InfoSoft</a>. Demo with simulated data.
+            <a href="https://nextginfosoft.com/book-demo" rel="noopener">Book a Demo</a>
         </div>
     </footer>
 </body>
